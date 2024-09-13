@@ -1,0 +1,124 @@
+https://www.quora.com/Is-there-an-AI-that-can-scrape-a-web-application-and-output-a-standalone-replica-of-it-I-know-there-are-website-duplication-apps-but-what-about-for-applications
+
+Is there an AI that can scrape a web application and output a standalone replica of it? I know there are website duplication apps but what about for applications?
+
+---
+
+If I understand the question correctly, it’s about creating a website/API that will be filled with data that will be continuously fetching from the web and processed.
+
+The question is quite extensive - depending on the programming language, there may be different options. Using the example of Python, an approximate scheme could be:
+
+1) Create a program / script that does web scraping. For example with Scrapy or requests/lxml etc.
+
+2) Design a database structure for the data that will be retrieved in the process of web scraping. For example, with PostgreSQL or MongoDB.
+
+3) Create a web application based on the framework (with Flask or Django), which will take data from the database and return them in the form of an API or a simple web pages.
+
+4) Implement the background task queues to be run continuously or periodically. Launching webspider , data processing, saving to database, all required tasks for handling data - with Celery + Redis Queue. If you need, there are additional tools needed for analysis and wrangling data (Pandas, NLTK and other libraries and frameworks).
+
+5) (Optional but desirable). Create a monitoring and logging system for the webspider, if something goes wrong in the process of web scraping. With built-in module logging or others.
+
+6) Deploy and configure web stack and enviroment on the server (Linux distro (Ubuntu Server etc), web server (Apache or Nginx), wsgi server (Gunicorn), database server (PostgreSQL or MongoDB), Python enviroment with all dependencies (frameworks, libs, your scripts)).
+
+
+
+https://www.reddit.com/r/webscraping/comments/yre1b6/webscraping_angular_app_site_help_needed/
+
+Webscraping (angular app) site help needed
+
+This site is kind of crazy. If devtools is open, they block everything.
+
+
+
+https://www.reddit.com/r/webscraping/comments/ubva7o/how_to_web_scrape_a_site_that_uses_firebase_api/
+
+How to Web Scrape a Site that Uses Firebase API?
+
+
+
+https://github.com/ArchiveBox/ArchiveBox
+
+Open source self-hosted web archiving. Takes URLs/browser history/bookmarks/Pocket/Pinboard/etc., saves HTML, JS, PDFs, media, and more...
+
+https://github.com/NixOS/nixpkgs/pull/277647
+
+https://github.com/NixOS/nixpkgs/pull/177365 # inseucre
+
+https://github.com/ArchiveBox/ArchiveBox/issues/988 # django 4
+
+# FIXME build error, old django
+
+NIXPKGS_ALLOW_INSECURE=1 nix-shell -p archivebox
+
+nix-repl> archivebox.version
+"0.7.2"
+
+
+
+https://blog.tomayac.com/2018/07/09/progressive-web-apps-in-the-http-archive-143748
+
+https://medium.com/dev-channel/progressive-web-apps-in-the-http-archive-614d4bcf81fe
+
+Progressive Web Apps in the HTTP Archive
+
+we present three different approaches and discuss their particular pros and cons for extracting data about Progressive Web Apps (PWA) from the HTTP Archive
+
+
+
+
+https://en.wikipedia.org/wiki/Archive.today
+
+archive.today (or archive.is) is a web archiving site, founded in 2012, that saves snapshots on demand, and has support for JavaScript-heavy sites such as Google Maps and progressive web apps such as Twitter.
+
+fails on https://boxy-svg.com/app
+
+has many small bugs: github discourse reddit ...
+
+
+
+https://github.com/rhizome-conifer/conifer
+
+https://conifer.rhizome.org/
+
+aka: Webrecorder.io
+
+
+
+https://webrecorder.net/tools#pywb
+
+https://github.com/NixOS/nixpkgs/pull/189950
+
+pywb toolkit is full-featured, advanced web archiving capture and replay framework for python. It provides command-line tools and an extensible framework for high-fidelity web archive access and capture, including localization and access control. A subset of features provides the basic functionality also known as a 'wayback machine', but pywb includes additional features to create new web archives and to manage existing collections.
+
+
+
+https://github.com/NixOS/nixpkgs/pull/138929
+
+wsgiprox
+
+dependency of warcio
+
+
+
+https://github.com/webrecorder/warcio
+
+https://github.com/NixOS/nixpkgs/pull/139766
+
+warcio
+
+dependency of ipwb
+
+
+
+ipwb
+
+https://github.com/oduwsdl/ipwb
+
+InterPlanetary Wayback: A distributed and persistent archive replay system using IPFS
+
+
+
+
+https://github.com/topics/web-archiving
+
+
