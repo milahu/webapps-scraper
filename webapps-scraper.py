@@ -7,6 +7,7 @@ import json
 import base64
 import logging
 import cdp_socket
+import urllib.parse
 
 
 
@@ -86,7 +87,9 @@ async def responseReceived(args, driver, target):
     response_body = base64.b64decode(res["body"]) if res["base64Encoded"] else res["body"]
     logger.debug(f"responseReceived {request_id} Network.getResponseBody -> {type(response_body)} {response_body[:100]}...")
     # TODO better
-    response_body_path = output_path + "/" + response_url.replace("https://", "").replace("http://", "")
+    response_body_path = response_url.replace("https://", "").replace("http://", "")
+    response_body_path = urllib.parse.unquote(response_body_path) # "%20" -> " ", etc
+    response_body_path = output_path + "/" + response_body_path
     logger.debug(f"responseReceived {request_id} writing {response_body_path}")
     os.makedirs(os.path.dirname(response_body_path), exist_ok=True)
     open_mode = "wb" if type(response_body) == bytes else "w"
