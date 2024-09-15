@@ -11,7 +11,8 @@ import urllib.parse
 
 
 
-output_path = "out"
+#output_path = "out"
+output_path = sys.argv[2]
 
 
 
