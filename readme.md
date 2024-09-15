@@ -46,6 +46,17 @@ the output files are written to `out/boxy-svg.com/`
 
 
 
+## todo
+
+
+
+### also capture requests in new windows
+
+currently, when the app opens a new window to show some page,
+then the requests to that page are not captured
+
+
+
 ## keywords
 
 - archiving web apps
