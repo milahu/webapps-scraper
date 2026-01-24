@@ -1,12 +1,12 @@
 { lib
-, python3
+, python
 , fetchFromGitHub
 , setuptools
 , wheel
 , selenium-driverless
 }:
 
-python3.pkgs.buildPythonPackage rec {
+python.pkgs.buildPythonPackage rec {
   pname = "aiohttp-chromium";
   version = "0.0.2";
   pyproject = true;
