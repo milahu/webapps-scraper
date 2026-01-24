@@ -4,6 +4,7 @@
 , setuptools
 , wheel
 , selenium-driverless
+, legacy-cgi
 }:
 
 python.pkgs.buildPythonPackage rec {
@@ -20,6 +21,10 @@ python.pkgs.buildPythonPackage rec {
     hash = "sha256-fUtgFvJpxKF+d+NlJ/fb34aZoIeB/PIwk7RE37Rpykw=";
   };
 
+  postUnpack = ''
+    export HOME=$TMP
+  '';
+
   nativeBuildInputs = [
     setuptools
     wheel
@@ -27,6 +32,7 @@ python.pkgs.buildPythonPackage rec {
 
   propagatedBuildInputs = [
     selenium-driverless
+    legacy-cgi
   ];
 
   pythonImportsCheck = [ "aiohttp_chromium" ];

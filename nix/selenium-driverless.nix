@@ -1,71 +1,60 @@
-{ lib
-, python
-, fetchFromGitHub
-, fetchurl
-, cdp-socket
+{
+  lib,
+  python,
+  fetchFromGitHub,
+  cdp-socket,
 }:
 
 python.pkgs.buildPythonPackage rec {
   pname = "selenium-driverless";
-  # grep version src/selenium_driverless/__init__.py
-  version = "1.7.3";
+  version = "unstable-2024-10-30";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "kaliiiiiiiiii";
     repo = "Selenium-Driverless";
-    rev = "5f56548a3c2bade6d42edda7bcc8085fcf8afff0";
-    hash = "sha256-31Dpx9ot3PQ5Lwfe6XRjXrvBZnWHs7IY+Q9AAb2eYTw=";
+    # https://github.com/kaliiiiiiiiii/Selenium-Driverless/tree/dev
+    rev = "fb2339a3311334ec6b05ec33232570fb2e4af6ba";
+    hash = "sha256-s319wsR6HS47WBAD8uwa3crvARzRfGImKjfohOgN9Hk=";
   };
 
-  patches = [
-    # remove license nagger
-    # https://github.com/kaliiiiiiiiii/Selenium-Driverless/issues/122
-    # https://github.com/milahu/selenium_driverless
-    (fetchurl {
-      url = "https://github.com/milahu/selenium_driverless/commit/9795a393a4e4c74f9453e1aefa12064eda8ccdcb.patch";
-      hash = "sha256-3RXbCLJOs10JjiEy/Wqyb7VE81KjWbi0DfJK9cMT4uU=";
-    })
-  ];
-
-  nativeBuildInputs = [
+  build-system = [
     python.pkgs.setuptools
     python.pkgs.wheel
   ];
 
-  propagatedBuildInputs = with python.pkgs; [
+  dependencies = with python.pkgs; [
+    # aiodebug
+    aiofiles
+    aiohttp
+    # cdp-patches
     cdp-socket
+    jsondiff
+    matplotlib
     numpy
+    platformdirs
     pytest
+    pytest-asyncio
+    pytest-subtests
+    scipy
     selenium
     setuptools
+    sphinx
+    sphinx-autodoc-typehints
+    sphinx-rtd-theme
     twine
-    matplotlib
-    scipy
-    aiofiles
-    platformdirs
+    typing-extensions
+    websockets
   ];
 
-  postPatch = ''
-    echo "relaxing dependency versions"
-    sed -i.bak -E "s/[~>]=[0-9.]+([\"'])/\1/g" setup.py
-    diff -u setup.py.bak setup.py || true
-    rm setup.py.bak
-
-    # fix: find_elements returns wrong number of elements
-    # https://github.com/kaliiiiiiiiii/Selenium-Driverless/issues/162
-    substituteInPlace src/selenium_driverless/types/deserialize.py \
-      --replace \
-        "int(description[-2])" \
-        "int(description[len(class_name)+1:-1])"
-  '';
-
-  pythonImportsCheck = [ "selenium_driverless" ];
+  pythonImportsCheck = [
+    "selenium_driverless"
+  ];
 
   meta = with lib; {
-    description = "Undetected Selenium without usage of chromedriver";
+    description = "A stealthy browser automation framework";
     homepage = "https://github.com/kaliiiiiiiiii/Selenium-Driverless";
     license = licenses.cc-by-nc-sa-40;
-    maintainers = with maintainers; [ ];
+    maintainers = with lib.maintainers; [ ];
   };
 }
