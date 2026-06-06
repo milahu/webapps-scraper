@@ -31,6 +31,7 @@ let
     psutil
     beautifulsoup4 # html parser
     */
+    legacy-cgi
   ])
   ++
   (with extraPythonPackages; [
